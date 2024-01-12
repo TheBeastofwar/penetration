@@ -1,0 +1,63 @@
+version: '3.7'
+
+services:
+  all_mysql:
+    build:
+      context: ./all_mysql
+      dockerfile: Dockerfile
+    container_name: all_mysql
+    restart: always
+    networks:
+      - ruoyi
+
+  ruoyi_web:
+    build:
+      context: ./ruoyi_web
+      dockerfile: Dockerfile
+    container_name: ruoyi_web
+    restart: always
+    ports:
+      - "8080:80"
+    depends_on:
+      - all_mysql
+    networks:
+      - ruoyi
+      - nacos
+
+  nacos_web:
+    build:
+      context: ./nacos_web
+      dockerfile: Dockerfile
+    container_name: nacos_web
+    restart: always
+    networks:
+      - nacos
+      - fms
+
+  fms_web:
+    build:
+      context: ./fms_web
+      dockerfile: Dockerfile
+    container_name: fms_web
+    restart: always
+    networks:
+      fms:
+        ipv4_address: 10.2.2.10
+
+networks:
+  ruoyi:
+    external: true
+
+  nacos:
+    driver: bridge
+    internal: true
+    ipam:
+      config:
+        - subnet: 10.1.1.0/24
+
+  fms:
+    driver: bridge
+    internal: true
+    ipam:
+      config:
+        - subnet: 10.2.2.0/24
