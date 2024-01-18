@@ -1,5 +1,7 @@
 #!/bin/bash
 
+docker-compose down
+
 network_exists=$(docker network ls --format '{{.Name}}' | awk '{print $1}' | grep -w "ruoyi")
 
 if [[ -n $network_exists ]]; then
@@ -7,5 +9,3 @@ if [[ -n $network_exists ]]; then
 else
   echo "ruoyi网络不存在"
 fi
-
-docker-compose down
