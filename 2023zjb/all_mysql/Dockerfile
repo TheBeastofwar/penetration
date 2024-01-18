@@ -5,4 +5,5 @@ COPY quartz.sql /docker-entrypoint-initdb.d/quartz.sql
 COPY flag.sql /docker-entrypoint-initdb.d/flag.sql
 COPY flag /flag
 COPY my.cnf /etc/my.cnf
+RUN chmod -R 777 /usr/lib64/mysql/plugin/
 EXPOSE 3306
