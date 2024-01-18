@@ -21,4 +21,5 @@
 jwt弱口令
 如果出现服务器错误把所有cookie删除再刷新试试
 - 分享处任意文件读取
+
 ![image](https://github.com/TheBeastofwar/penetration/assets/117450378/712645e4-0cdc-4039-8f18-489568faa1f1)
